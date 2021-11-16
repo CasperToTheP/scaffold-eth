@@ -29,7 +29,7 @@ import {
 } from "./hooks";
 import { BlockPicker } from 'react-color'
 
-
+const { Search } = Input;
 const { BufferList } = require("bl");
 // https://www.npmjs.com/package/ipfs-http-client
 const ipfsAPI = require("ipfs-http-client");
@@ -390,12 +390,69 @@ function App(props) {
   }, [assets, readContracts, transferEvents]);*/
 
   const galleryList = [];
+ /* const onSearch = value => console.log(value);*/
+ /* tx( writeContracts.YourCollectible.mintItem(value)*/
+ //const onSearch = value => tx( writeContracts.YourCollectible.mintItem(value));
+ const onSearch = val => 
+ {
+
+    let value;
+    try {
+      value = parseEther("" + val*0.015);
+    } catch (e) {
+      // failed to parseEther, try something else
+      value = parseEther("" + parseFloat(val*0.015).toFixed(8));
+    }
+    tx( writeContracts.YourCollectible.mintItem(val, {
+    value,
+}),
+);}
+/* 
+const onSearch = value =>  tx( writeContracts.YourCollectible.mintItem(value, {
+  value: parseEther("0.02"), */
+
+/*  {() => {
+  tx(
+    writeContracts.YourContract.setPurpose("💵 Paying for this one!", {
+      value: parseEther("0.001"),
+    }),
+  );
+}} */
 
   return (
     <div className="App">
       {/* ✏️ Edit the header and change the title to your project name */}
       <Header />
       {networkDisplay}
+
+      
+          <h1 style={{ fontSize: 70, fontStyle: "italic", fontVariant: "small-caps", fontFamily: "monospace"}}>Snakes on a chain🔗</h1>
+          <p style={{ fontSize: 30, fontStyle: "italic", fontVariant: "small-caps", fontFamily: "monospace"}}>
+           is a nft project where a random svg snakes a generated on a random background.<br></br>
+            This can either be in the desert, the water or SPACE! 🪐<br></br>
+            <br></br>
+            Both the apperance of the snake and its movement are randomly generated and unique.<br></br>
+            That is why we say that each snakes takes its own path in life. Like you also should!<br></br>
+
+          </p>
+   
+
+      <div className="grid grid-cols-1 md:grid-cols-1">
+       {  <img src="/des1.svg" className="" /> }
+        <img src="/space2.svg" className="" />
+       {  <img src="/wat2.svg" className="" /> }
+      </div>
+
+      <p style={{ fontSize: 30, fontStyle: "italic", fontVariant: "small-caps", fontFamily: "monospace"}}>
+      <br></br>
+        The snakes live FULLY on the ethereum block chain⛓️<br></br>
+         All the image data is stored in the contract so the art is fully decentralized.   <br></br>
+         <br></br>
+            The price of one snake is 0.015 Ξ<br></br>
+            You can buy multiple below.<br></br>
+            <br></br>
+            Minting will start in week 46.
+        </p>
 
       <BrowserRouter>
         <Menu style={{ textAlign: "center" }} selectedKeys={[route]} mode="horizontal">
@@ -406,7 +463,7 @@ function App(props) {
               }}
               to="/"
             >
-              Your Loogies
+              Your Snakes
             </Link>
           </Menu.Item>
           <Menu.Item key="/debug">
@@ -423,17 +480,20 @@ function App(props) {
 
         <Switch>
           <Route exact path="/">
-            {/*
-                🎛 this scaffolding is full of commonly used components
-                this <Contract/> component will automatically parse your ABI
-                and give you a form to interact with it locally
-            */}
+            {
+              
+            }
 
             <div style={{ maxWidth: 820, margin: "auto", marginTop: 32, paddingBottom: 32 }}>
               {isSigner?(
-                <Button type={"primary"} onClick={()=>{
-                  tx( writeContracts.YourCollectible.mintItem() )
-                }}>MINT</Button>
+                <Search
+                placeholder="input number of snakes to mint"
+                allowClear
+                enterButton="MINT"
+                size="large"
+                onSearch={onSearch
+                }
+              />
               ):(
                 <Button type={"primary"} onClick={loadWeb3Modal}>CONNECT WALLET</Button>
               )}
@@ -496,13 +556,8 @@ function App(props) {
                 }}
               />
             </div>
-            <div style={{ maxWidth: 820, margin: "auto", marginTop: 32, paddingBottom: 256 }}>
 
-              🛠 built with <a href="https://github.com/austintgriffith/scaffold-eth" target="_blank">🏗 scaffold-eth</a>
-
-              🍴 <a href="https://github.com/austintgriffith/scaffold-eth" target="_blank">Fork this repo</a> and build a cool SVG NFT!
-
-            </div>
+            
           </Route>
           <Route path="/debug">
 
@@ -521,9 +576,14 @@ function App(props) {
         </Switch>
       </BrowserRouter>
 
+      <div style={{ maxWidth: 820, margin: "auto", marginTop: 32, paddingBottom: 256 }}>
+
+            <p> <a href="https://twitter.com/SnakesOnAChain" target="_blank">🕊️ Twitter</a> | 🛠 built with <a href="https://github.com/austintgriffith/scaffold-eth" target="_blank">🏗 scaffold-eth</a></p>
+
+            </div>
+
       <ThemeSwitch />
 
-      {/* 👨‍💼 Your account is in the top right with a wallet at connect options */}
       <div style={{ position: "fixed", textAlign: "right", right: 0, top: 0, padding: 10 }}>
         <Account
           address={address}
@@ -540,7 +600,7 @@ function App(props) {
         {faucetHint}
       </div>
 
-      {/* 🗺 Extra UI like gas price, eth price, faucet, and support: */}
+ 
       <div style={{ position: "fixed", textAlign: "left", left: 0, bottom: 20, padding: 10 }}>
         <Row align="middle" gutter={[4, 4]}>
           <Col span={8}>
@@ -569,7 +629,6 @@ function App(props) {
         <Row align="middle" gutter={[4, 4]}>
           <Col span={24}>
             {
-              /*  if the local provider has a signer, let's show the faucet:  */
               faucetAvailable ? (
                 <Faucet localProvider={localProvider} price={price} ensProvider={mainnetProvider} />
               ) : (

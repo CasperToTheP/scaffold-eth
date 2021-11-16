@@ -99,6 +99,32 @@
     "type": "event"
   },
   {
+    "inputs": [],
+    "name": "MAX_SUPPLY",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "PRICE",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -130,57 +156,6 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "baseURI",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "chubbiness",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "color",
-    "outputs": [
-      {
-        "internalType": "bytes3",
-        "name": "",
-        "type": "bytes3"
       }
     ],
     "stateMutability": "view",
@@ -230,16 +205,16 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "mintItem",
-    "outputs": [
+    "inputs": [
       {
         "internalType": "uint256",
-        "name": "",
+        "name": "numTokens",
         "type": "uint256"
       }
     ],
-    "stateMutability": "nonpayable",
+    "name": "mintItem",
+    "outputs": [],
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -272,6 +247,19 @@
     "inputs": [
       {
         "internalType": "uint256",
+        "name": "numTokens",
+        "type": "uint256"
+      }
+    ],
+    "name": "ownerMint",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
         "name": "tokenId",
         "type": "uint256"
       }
@@ -290,13 +278,119 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "id",
-        "type": "uint256"
+        "internalType": "string",
+        "name": "seed",
+        "type": "string"
       }
     ],
     "name": "renderTokenById",
     "outputs": [
+      {
+        "components": [
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "hue",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "saturation",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "lightness",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct YourCollectible.Color",
+            "name": "color",
+            "type": "tuple"
+          },
+          {
+            "internalType": "string",
+            "name": "path1",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "path2",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "bgIdx",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "thickIdx",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "thickness",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "head",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "head_mark",
+            "type": "uint256"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "hue",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "saturation",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "lightness",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct YourCollectible.Color",
+            "name": "head_mark_color",
+            "type": "tuple"
+          },
+          {
+            "internalType": "uint256",
+            "name": "snakiness",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "skin_pattern_scale",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "skin_pattern_freq",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "skin_pattern_octaves",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct YourCollectible.Snake",
+        "name": "",
+        "type": "tuple"
+      },
       {
         "internalType": "string",
         "name": "",
@@ -417,6 +511,42 @@
   {
     "inputs": [
       {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "hue",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "saturation",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "lightness",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct YourCollectible.Color",
+        "name": "color",
+        "type": "tuple"
+      }
+    ],
+    "name": "toHSLString",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint256",
         "name": "index",
         "type": "uint256"
@@ -523,6 +653,13 @@
     "name": "transferOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "withdrawAll",
+    "outputs": [],
+    "stateMutability": "payable",
     "type": "function"
   }
 ]
