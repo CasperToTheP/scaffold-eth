@@ -437,10 +437,13 @@ const onSearch = value =>  tx( writeContracts.YourCollectible.mintItem(value, {
           </p>
    
 
-      <div className="grid grid-cols-1 md:grid-cols-1">
-       {  <img src="/des1.svg" className="" /> }
+      <div className="grid grid-cols-2 md:grid-cols-3">
+        <img src="/des1.svg" className="" />
+        <img src="/space1.svg" className="" />
+        <img src="/wat1.svg" className="" />
+        <img src="/wat2.svg" className="" />
+        <img src="/des2.svg" className="" />
         <img src="/space2.svg" className="" />
-       {  <img src="/wat2.svg" className="" /> }
       </div>
 
       <p style={{ fontSize: 30, fontStyle: "italic", fontVariant: "small-caps", fontFamily: "monospace"}}>

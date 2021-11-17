@@ -21,8 +21,12 @@ const main = async () => {
   }
   console.log(" \n")*/
 
+  const snakerMaker = await deploy("SnakerMaker")
+
+  const snakerMakerAdd = snakerMaker.address
+
   // deploy the contract with all the artworks forSale
-  const yourCollectible = await deploy("YourCollectible"/*,[ bytes32Array ]*/) // <-- add in constructor args like line 19 vvvv
+  const yourCollectible = await deploy("YourCollectible",[],{},{ "SnakerMaker": snakerMakerAdd }) // <-- add in constructor args like line 19 vvvv
 
   yourCollectible.transferOwnership("0x34aA3F359A9D614239015126635CE7732c18fDF3") //austingriffith.eth
 
@@ -86,7 +90,7 @@ const main = async () => {
 
 const deploy = async (contractName, _args = [], overrides = {}, libraries = {}) => {
   console.log(` 🛰  Deploying: ${contractName}`);
-
+  
   const contractArgs = _args || [];
   const contractArtifacts = await ethers.getContractFactory(contractName,{libraries: libraries});
   const deployed = await contractArtifacts.deploy(...contractArgs, overrides);
